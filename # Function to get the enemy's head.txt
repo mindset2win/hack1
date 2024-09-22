@@ -1,0 +1,35 @@
+# Function to get the enemy's head position
+def get_enemy_head_pos():
+    # Implement your logic here to detect enemy head positions
+
+# Function to aim and shoot
+def aim_and_shoot():
+    enemy_head_pos = get_enemy_head_pos()
+
+    # Calculate the aiming point on the enemy's head
+    aim_point = (enemy_head_pos[0] + (enemy_head_pos[0] - pyautogui.position().x),
+                 enemy_head_pos[1] + (enemy_head_pos[1] - pyautogui.position().y))
+
+    # Move the mouse to the aim point
+    pyautogui.moveTo(aim_point, duration=0.5)
+
+    # Wait for the crosshair to reach the aim point
+    time.sleep(0.5)
+
+    # Click to shoot
+    pyautogui.click()
+
+    # Add some randomness to the mouse movement
+    pyautogui.moveRel(random.uniform(-2, 2), random.uniform(-2, 2))
+
+# Function to add some noise to the script
+def add_noise():
+    # Play a sound to make it seem like a human is playing
+    winsound.PlaySound('white_noise.wav', winsound.SND_ASYNC)
+    time.sleep(1)
+
+# Main loop
+while True:
+    aim_and_shoot()
+    add_noise()
+    time.sleep(random.uniform(1, 3))
